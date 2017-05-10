@@ -40,14 +40,22 @@ namespace GCFinalProject.Controllers
         public ActionResult Results()
         {
             string searchTerm = "chicken";
+            string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 10;
 
             var url = "https://api.edamam.com";
-            var strPostData = "/search?q=" + searchTerm;
+            var strPostData = "/search?q=" + searchTerm;            
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
+
+            if (searchRestriction != "")
+            {
+                strPostData += "&health=" + searchRestriction;
+            }
+
+            
             Console.WriteLine(url + strPostData);
 
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
