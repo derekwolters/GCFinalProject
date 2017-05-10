@@ -7,11 +7,16 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
+<<<<<<< HEAD
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Xml;
+=======
+using System.Web.Script.Serialization;
+using GCFinalProject.Models;
+>>>>>>> 8e43f1b1a072e8a0261dd64e67aefa20a178573b
 
 namespace GCFinalProject.Controllers
 {
@@ -50,6 +55,7 @@ namespace GCFinalProject.Controllers
 
         public ActionResult Results()
         {
+<<<<<<< HEAD
             //var URL = "https://api.edamam.com";
             //var strPostData = "https://api.edamam.com/search?q=" + searchTerm;
             //strPostData += "&app_id=" + clientID;
@@ -84,12 +90,18 @@ namespace GCFinalProject.Controllers
 
             //ViewBag.ApiText = foodData;
 
+=======
+>>>>>>> 8e43f1b1a072e8a0261dd64e67aefa20a178573b
             string searchTerm = "chicken";
+            int firstResultIndex = 0;
+            int lastRestultIndex = 10;
 
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
+            strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
+            Console.WriteLine(url + strPostData);
 
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
@@ -104,10 +116,20 @@ namespace GCFinalProject.Controllers
 
             //Converts that text into JSON
             JObject foodData = JObject.Parse(ApiText);
+            
+            //serialize data into usable format
+            JavaScriptSerializer oJS = new JavaScriptSerializer();
+            RootObject oRootObject = new RootObject();
+            oRootObject = oJS.Deserialize<RootObject>(ApiText);
 
-            ViewBag.ApiText = foodData;
+            for (int i = 0; i < oRootObject.hits.Count; i++)
+            {
+                Console.WriteLine(oRootObject.hits[i]);
+            }
 
-            return View();
+            var list = oRootObject.hits.ToList();
+
+            return View(list);
         }
     }
 }
