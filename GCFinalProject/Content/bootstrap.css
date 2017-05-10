@@ -1078,6 +1078,10 @@ pre code {
   }
 }
 
+#sweets {
+    background-image: url('images/sweets.jpg');
+}
+
 @media (min-width: 992px) {
   .container {
     max-width: 970px;
@@ -4928,22 +4932,25 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron {
-  padding: 30px;
-  margin-bottom: 30px;
-  font-size: 21px;
-  font-weight: 200;
-  line-height: 2.1428571435;
-  color: inherit;
-  background-color: #eeeeee;
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background: url('images/food.jpg') no-repeat center;
 }
 
 .jumbotron h1 {
   line-height: 1;
-  color: inherit;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .jumbotron p {
   line-height: 1.4;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .container .jumbotron {
