@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthyCravingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Craving">
+          <Key>
+            <PropertyRef Name="CravingID" />
+          </Key>
+          <Property Name="CravingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CravingName" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HealthyCravings.dbo.CravingNutrient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CravingNutrient">
+          <Key>
+            <PropertyRef Name="CravingID" />
+            <PropertyRef Name="NutrientID" />
+          </Key>
+          <Property Name="CravingID" Type="int" Nullable="false" />
+          <Property Name="NutrientID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nutrient">
+          <Key>
+            <PropertyRef Name="NutrientID" />
+          </Key>
+          <Property Name="NutrientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NutrientName" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HealthyCravings.dbo.NutrientSuggestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NutrientSuggestion">
+          <Key>
+            <PropertyRef Name="NutrientID" />
+            <PropertyRef Name="SuggestionID" />
+          </Key>
+          <Property Name="NutrientID" Type="int" Nullable="false" />
+          <Property Name="SuggestionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suggestion">
+          <Key>
+            <PropertyRef Name="SuggestionID" />
+          </Key>
+          <Property Name="SuggestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuggestionName" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="HealthyCravingsModelStoreContainer">
+          <EntitySet Name="Craving" EntityType="Self.Craving" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nutrient" EntityType="Self.Nutrient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suggestion" EntityType="Self.Suggestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CravingNutrient" EntityType="Self.CravingNutrient" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CravingNutrient].[CravingID] AS [CravingID], 
+    [CravingNutrient].[NutrientID] AS [NutrientID]
+    FROM [dbo].[CravingNutrient] AS [CravingNutrient]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NutrientSuggestion" EntityType="Self.NutrientSuggestion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NutrientSuggestion].[NutrientID] AS [NutrientID], 
+    [NutrientSuggestion].[SuggestionID] AS [SuggestionID]
+    FROM [dbo].[NutrientSuggestion] AS [NutrientSuggestion]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthyCravingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Craving">
+          <Key>
+            <PropertyRef Name="CravingID" />
+          </Key>
+          <Property Name="CravingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CravingName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nutrient">
+          <Key>
+            <PropertyRef Name="NutrientID" />
+          </Key>
+          <Property Name="NutrientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NutrientName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Suggestion">
+          <Key>
+            <PropertyRef Name="SuggestionID" />
+          </Key>
+          <Property Name="SuggestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuggestionName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CravingNutrient">
+          <Key>
+            <PropertyRef Name="CravingID" />
+            <PropertyRef Name="NutrientID" />
+          </Key>
+          <Property Name="CravingID" Type="Int32" Nullable="false" />
+          <Property Name="NutrientID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NutrientSuggestion">
+          <Key>
+            <PropertyRef Name="NutrientID" />
+            <PropertyRef Name="SuggestionID" />
+          </Key>
+          <Property Name="NutrientID" Type="Int32" Nullable="false" />
+          <Property Name="SuggestionID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="HealthyCravingsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cravings" EntityType="Self.Craving" />
+          <EntitySet Name="Nutrients" EntityType="Self.Nutrient" />
+          <EntitySet Name="Suggestions" EntityType="Self.Suggestion" />
+          <EntitySet Name="CravingNutrients" EntityType="Self.CravingNutrient" />
+          <EntitySet Name="NutrientSuggestions" EntityType="Self.NutrientSuggestion" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthyCravingsModelStoreContainer" CdmEntityContainer="HealthyCravingsEntities">
+          <EntitySetMapping Name="Cravings">
+            <EntityTypeMapping TypeName="HealthyCravingsModel.Craving">
+              <MappingFragment StoreEntitySet="Craving">
+                <ScalarProperty Name="CravingID" ColumnName="CravingID" />
+                <ScalarProperty Name="CravingName" ColumnName="CravingName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nutrients">
+            <EntityTypeMapping TypeName="HealthyCravingsModel.Nutrient">
+              <MappingFragment StoreEntitySet="Nutrient">
+                <ScalarProperty Name="NutrientID" ColumnName="NutrientID" />
+                <ScalarProperty Name="NutrientName" ColumnName="NutrientName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suggestions">
+            <EntityTypeMapping TypeName="HealthyCravingsModel.Suggestion">
+              <MappingFragment StoreEntitySet="Suggestion">
+                <ScalarProperty Name="SuggestionID" ColumnName="SuggestionID" />
+                <ScalarProperty Name="SuggestionName" ColumnName="SuggestionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CravingNutrients">
+            <EntityTypeMapping TypeName="HealthyCravingsModel.CravingNutrient">
+              <MappingFragment StoreEntitySet="CravingNutrient">
+                <ScalarProperty Name="CravingID" ColumnName="CravingID" />
+                <ScalarProperty Name="NutrientID" ColumnName="NutrientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NutrientSuggestions">
+            <EntityTypeMapping TypeName="HealthyCravingsModel.NutrientSuggestion">
+              <MappingFragment StoreEntitySet="NutrientSuggestion">
+                <ScalarProperty Name="NutrientID" ColumnName="NutrientID" />
+                <ScalarProperty Name="SuggestionID" ColumnName="SuggestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
