@@ -1,18 +1,30 @@
-﻿
-@{
-    ViewBag.Title = "Results";
+﻿@{
+    ViewBag.Title = "Results";    
 }
 
 <h2>Results</h2>
 
+@for (int i = 0; i < 5; i++)
+{
+    <tr>
+        <td>
+            <a href="@Model[i].recipe.url" target=newtab>
+                <img src="@Model[i].recipe.image" alt="food" height="50" width="50">
+            </a>
+        </td>
+        <td>
+            @Model[i].recipe.label
+        </td>
+        <td>
+            @foreach(string e in @Model[i].recipe.ingredientLines)
+            {
+                @e;
+                <br />
+            }
+        </td>
+    </tr>
+}
 
-<body>
-    <p>++ @ViewBag.ApiText</p>
-
-
-
-
-    <footer>
-        <p>Powered by <img src="~/Content/Edamam_logo_full_RGB.png" alt="edamam logo" height="20" width="100"></p>
-    </footer>
-</body>
+<footer>
+    
+</footer>
