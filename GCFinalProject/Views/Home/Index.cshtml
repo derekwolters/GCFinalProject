@@ -2,43 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Hungry Hungry Hipsters</h1>
-    <p class="lead">Craving something? Tell us what it is and we will tell you what nurtients your body may be needing and even give you some recipies to satisfy that craving.</p>
-</div>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrapOveride.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+        <h1>Hungry Hungry Hipsters</h1>
+        <p class="lead">Craving something? Tell us what it is and we will tell you what nurtients your body may be needing and even give you some recipies to satisfy that craving.</p>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
+    <div class="container">
         <h2>What are you Craving?</h2>
-        <input type="submit" id="sweets" value="Sweets" onsubmit="return Selection()"/>
-        <!--<p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            <div class="row">
+                <div class="col-md-3"> 
+                    <input type="submit" class="buttonsub" id="sweets" value="Sweets" onsubmit="return Selection()"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" class="buttonsub" id="bread" value="Bread" onsubmit="return Selection()"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" class="buttonsub" id="salty" value="Salty Food" onsubmit="return Selection()"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" class="buttonsub" id="fatty" value="Fatty Food" onsubmit="return Selection()"/>
+                </div>
+            </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>-->
-    </div>
-</div>
+</body>
+</html>
+
 <script>
     function Selection()
     {
-        
         switch (onsubmit) {
-            case sweet:
-                return selection = 2;
+            case $('#sweets'):
+                return 2;
+            case $('#salty'):
+                return 10;
             default:
-                return selection = 0;
-
+                return 0;
         }
     }
 </script>
