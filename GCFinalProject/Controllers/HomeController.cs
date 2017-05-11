@@ -36,7 +36,6 @@ namespace GCFinalProject.Controllers
 
             return View();
         }
-
         public ActionResult Results()
         {
             string searchTerm = "chicken";
@@ -45,7 +44,7 @@ namespace GCFinalProject.Controllers
             int lastRestultIndex = 10;
 
             var url = "https://api.edamam.com";
-            var strPostData = "/search?q=" + searchTerm;            
+            var strPostData = "/search?q=" + searchTerm;
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
@@ -54,7 +53,7 @@ namespace GCFinalProject.Controllers
             {
                 strPostData += "&health=" + searchRestriction;
             }
-            
+
             Console.WriteLine(url + strPostData);
 
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
@@ -70,7 +69,7 @@ namespace GCFinalProject.Controllers
 
             //Converts that text into JSON
             JObject foodData = JObject.Parse(ApiText);
-            
+
             //serialize data into usable format
             JavaScriptSerializer oJS = new JavaScriptSerializer();
             RootObject oRootObject = new RootObject();
@@ -85,5 +84,5 @@ namespace GCFinalProject.Controllers
 
             return View(list);
         }
-    }        
+    }
 }

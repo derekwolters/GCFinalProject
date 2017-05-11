@@ -13,8 +13,74 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
+        int userChoice = 2;
 
-        // GET: Nutrients
+        public ActionResult Selection(HealthyCravingsEntities db)
+        {
+            ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            var nutrientIDList = new List<int>();
+            var nutrientList = db.CravingNutrients.ToArray();
+            for (int i = 0; i < nutrientList.Length; i++)
+            {
+                if (userChoice == nutrientList[i].CravingID)
+                {
+                    nutrientIDList.Add(nutrientList[i].NutrientID);
+                }
+            }
+            ViewBag.Data = NutrientNames(db, nutrientIDList);
+            ViewBag.Selection = SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
+            return View();
+        }
+        public static List<string> NutrientNames(HealthyCravingsEntities db, List<int> nutrientIDList)
+        {
+            var nutrientNamesList = new List<string>();
+            var namesList = db.Nutrients.ToArray();
+            foreach (var NutrientID in nutrientIDList)
+            {
+                for (int i = 0; i < namesList.Length; i++)
+                {
+                    if (NutrientID == namesList[i].NutrientID)
+                    {
+                        nutrientNamesList.Add(namesList[i].NutrientName);
+                    }
+                }
+            }
+            return nutrientNamesList;
+
+        }
+        public static List<int> GetSuggestionID(HealthyCravingsEntities db, List<int> nutrientIDList)
+        {
+            var suggestedFoodsID = new List<int>();
+            var suggestionList = db.NutrientSuggestions.ToArray();
+            foreach (var nutrientID in nutrientIDList)
+            {
+                for (int i = 0; i < suggestionList.Length; i++)
+                {
+                    if (nutrientID == suggestionList[i].NutrientID)
+                    {
+                        suggestedFoodsID.Add(suggestionList[i].SuggestionID);
+                    }
+                }
+            }
+            return suggestedFoodsID;
+        }
+        public static List<string> SuggestedFoods(HealthyCravingsEntities db, List<int> GetSuggestionID)
+        {
+            var foodSuggestions = new List<string>();
+            var suggestionNames = db.Suggestions.ToArray();
+            foreach (var suggestionID in GetSuggestionID)
+            {
+                for (int i = 0; i < suggestionNames.Length; i++)
+                {
+                    if (suggestionID == suggestionNames[i].SuggestionID)
+                    {
+                        foodSuggestions.Add(suggestionNames[i].SuggestionName);
+                    }
+                }
+            }
+            return foodSuggestions;
+        }
+         //GET: Nutrients
         public ActionResult Index()
         {
             return View(db.Nutrients.ToList());

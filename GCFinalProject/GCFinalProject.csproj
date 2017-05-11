@@ -311,6 +311,7 @@
     <Content Include="Views\Nutrients\Details.cshtml" />
     <Content Include="Views\Nutrients\Edit.cshtml" />
     <Content Include="Views\Nutrients\Index.cshtml" />
+    <Content Include="Views\Nutrients\Selection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
