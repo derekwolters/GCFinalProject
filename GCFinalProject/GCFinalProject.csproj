@@ -187,16 +187,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\Craving.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CravingNutrient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-=======
     <Compile Include="Models\Results.cs" />
->>>>>>> 8e43f1b1a072e8a0261dd64e67aefa20a178573b
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
@@ -306,6 +303,7 @@
     <Content Include="Views\Nutrients\Details.cshtml" />
     <Content Include="Views\Nutrients\Edit.cshtml" />
     <Content Include="Views\Nutrients\Index.cshtml" />
+    <Content Include="Views\Nutrients\Selection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
