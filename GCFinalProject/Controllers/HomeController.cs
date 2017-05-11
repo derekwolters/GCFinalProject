@@ -12,12 +12,10 @@ using GCFinalProject.Models;
 
 namespace GCFinalProject.Controllers
 {
-
     public class HomeController : Controller
     {
         const string clientID = "4e30bc62";
         const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
-
         public ActionResult Index()
         {
             return View();
@@ -38,7 +36,7 @@ namespace GCFinalProject.Controllers
         }
         public ActionResult Results()
         {
-            string searchTerm = "chicken";
+            string searchTerm = NutrientsController.getFoodSuggestions()[0];
             string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 10;
@@ -53,8 +51,6 @@ namespace GCFinalProject.Controllers
             {
                 strPostData += "&health=" + searchRestriction;
             }
-
-            Console.WriteLine(url + strPostData);
 
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
@@ -74,11 +70,6 @@ namespace GCFinalProject.Controllers
             JavaScriptSerializer oJS = new JavaScriptSerializer();
             RootObject oRootObject = new RootObject();
             oRootObject = oJS.Deserialize<RootObject>(ApiText);
-
-            for (int i = 0; i < oRootObject.hits.Count; i++)
-            {
-                Console.WriteLine(oRootObject.hits[i]);
-            }
 
             var list = oRootObject.hits.ToList();
 

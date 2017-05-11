@@ -14,7 +14,7 @@ namespace GCFinalProject.Controllers
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
         int userChoice = 2;
-
+        static List<string> foodSuggestions = new List<string>();
         public ActionResult Selection(HealthyCravingsEntities db)
         {
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
@@ -28,7 +28,7 @@ namespace GCFinalProject.Controllers
                 }
             }
             ViewBag.Data = NutrientNames(db, nutrientIDList);
-            ViewBag.Selection = SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
+            ViewBag.Selection =   SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
             return View();
         }
         public static List<string> NutrientNames(HealthyCravingsEntities db, List<int> nutrientIDList)
@@ -66,7 +66,6 @@ namespace GCFinalProject.Controllers
         }
         public static List<string> SuggestedFoods(HealthyCravingsEntities db, List<int> GetSuggestionID)
         {
-            var foodSuggestions = new List<string>();
             var suggestionNames = db.Suggestions.ToArray();
             foreach (var suggestionID in GetSuggestionID)
             {
@@ -80,7 +79,15 @@ namespace GCFinalProject.Controllers
             }
             return foodSuggestions;
         }
-         //GET: Nutrients
+
+
+        public static List<string> getFoodSuggestions()
+        {
+            return foodSuggestions;
+        }
+
+
+        //GET: Nutrients
         public ActionResult Index()
         {
             return View(db.Nutrients.ToList());
