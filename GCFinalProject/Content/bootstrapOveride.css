@@ -1,0 +1,60 @@
+﻿.jumbotron {
+    width:100%;
+    padding-bottom:30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background: url('images/food.jpg') no-repeat center;
+    background-size:cover;
+}
+
+.jumbotron h1 {
+  line-height: 1;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.jumbotron p {
+  line-height: 1.4;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.buttonsub {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    font-size: 18pt;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    margin-left:60px;
+    margin-bottom:20px;
+}
+
+.buttonsub:hover {
+    background: #006633;
+    border: 5px solid #00b359;
+    border-radius: 50%;
+    transition: background-color 1s ease #006633;
+}
+
+#sweets {
+    background-image: url('images/sweets.jpg');
+    background-size:cover;
+}
+
+#bread {
+    background-image: url('images/bread.jpg');
+    background-size: cover;
+}
+
+#salty {
+    background-image: url('images/saltyfood.jpg');
+    background-size: cover;
+}
+
+#fatty {
+    background-image: url('images/fattyfood.jpg');
+    background-size: cover;
+}
