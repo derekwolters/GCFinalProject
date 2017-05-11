@@ -17,6 +17,7 @@ namespace GCFinalProject.Controllers
     {
         const string clientID = "4e30bc62";
         const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
+
         public ActionResult Index()
         {
             return View();
@@ -35,13 +36,10 @@ namespace GCFinalProject.Controllers
 
             return View();
         }
-        public ActionResult Craving()
-        {
-            return View();
-        }
         public ActionResult Results()
         {
             string searchTerm = "chicken";
+            string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 10;
 
@@ -50,6 +48,12 @@ namespace GCFinalProject.Controllers
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
+
+            if (searchRestriction != "")
+            {
+                strPostData += "&health=" + searchRestriction;
+            }
+
             Console.WriteLine(url + strPostData);
 
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);

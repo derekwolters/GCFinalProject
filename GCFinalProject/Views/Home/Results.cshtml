@@ -4,19 +4,24 @@
 
 <h2>Results</h2>
 
-@for (int i = 0; i < 10; i++)
+@for (int i = 0; i < 5; i++)
 {
     <tr>
         <td>
             <a href="@Model[i].recipe.url" target=newtab>
-                <img src="@Model[i].recipe.image" alt="food" height="200" width="200">
-            </a>            
+                <img src="@Model[i].recipe.image" alt="food" height="50" width="50">
+            </a>
         </td>
         <td>
             @Model[i].recipe.label
-            <br />
-            <br />
-        </td>        
+        </td>
+        <td>
+            @foreach(string e in @Model[i].recipe.ingredientLines)
+            {
+                @e;
+                <br />
+            }
+        </td>
     </tr>
 }
 
