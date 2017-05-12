@@ -22,7 +22,7 @@ namespace GCFinalProject.Controllers
         {
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
             var nutrientIDList = new List<int>();
-            var foodRestriction = dietChoice;
+            foodRestriction = dietChoice;
             var nutrientList = db.CravingNutrients.ToArray();
             for (int i = 0; i < nutrientList.Length; i++)
             {

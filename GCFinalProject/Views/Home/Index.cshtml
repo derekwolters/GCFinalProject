@@ -19,10 +19,13 @@
         <h2> Craving something? </h2>
         @using (Html.BeginForm("Selection", "Nutrients"))
         {
-            <select>
-                <option type="submit" name="foodRestriction" value="vegan">Vegan</option>
-                <option value="gf">Gluten-Free</option>
-                <option value="peanut">Peanut Allergy</option>
+            <select name="dietChoice">
+                <option value="vegan">Vegan</option>
+                <option value="gluten-free">Gluten-Free</option>
+                <option value="peanut-free">Peanut Allergy</option>
+                <option value="vegitarian">Vegitarian</option>
+                <option value="tree-nut-free">Tree Nut Allergy</option>
+                <option value="alcohol-free">Alcohol Free</option>
             </select>
 
             <div class="row">
