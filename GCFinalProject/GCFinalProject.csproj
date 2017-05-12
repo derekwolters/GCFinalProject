@@ -227,13 +227,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrapOveride.css" />
+    <Content Include="Content\images\acidic.jpg" />
+    <Content Include="Content\images\alcohol.jpg" />
     <Content Include="Content\images\bread.jpg" />
+    <Content Include="Content\images\chocolate.jpg" />
     <Content Include="Content\images\fattyfood.jpg" />
     <Content Include="Content\images\food.jpg" />
     <Content Include="Content\images\h.jpg" />
     <Content Include="Content\images\hippohipster.jpg" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\saltyfood.jpg" />
+    <Content Include="Content\images\soda.jpg" />
     <Content Include="Content\images\sweets.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

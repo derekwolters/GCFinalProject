@@ -29,7 +29,11 @@
 .jumbotron img {
     display: block;
     margin: auto;
+    height:253px;
+    width: 460px;
+    padding-bottom: 15px;
 }
+
 
 .buttonsub {
     height: 200px;
@@ -67,4 +71,24 @@
 #fatty {
     background-image: url('images/fattyfood.jpg');
     background-size: cover;
+}
+
+#chocolate {
+    background-image: url('images/chocolate.jpg');
+    background-size:cover;
+}
+
+#alcohol {
+    background-image: url('images/alcohol.jpg');
+    background-size:cover;
+}
+
+#acidic {
+    background-image: url('images/acidic.jpg');
+    background-size:cover;
+}
+
+#soda {
+    background-image: url('images/soda.jpg');
+    background-size:cover;
 }

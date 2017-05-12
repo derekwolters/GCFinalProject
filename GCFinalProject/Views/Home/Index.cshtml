@@ -20,6 +20,12 @@
         <h2> Craving something? </h2>
         @using (Html.BeginForm("Selection", "Nutrients"))
         {
+            <select>
+                <option type="submit" name="searchRestriction" value="vegan">Vegan</option>
+                <option value="gf">Gluten-Free</option>
+                <option value="peanut">Peanut Allergy</option>
+            </select>
+
             <div class="row">
                 <div class="col-md-3">
                     <button type="submit" class="buttonsub" id="sweets" value="2" name="userChoice">Sweets</button>
@@ -33,11 +39,19 @@
                 <div class="col-md-3">
                     <button type="submit" class="buttonsub" id="fatty" value="4" name="userChoice">Fatty Foods</button>
                 </div>
+                <div class="col-md-3">
+                    <button type="submit" class="buttonsub" id="chocolate" value="1" name="userChoice">Chocolate</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="buttonsub" id="alcohol" value="6" name="userChoice">Alcohol</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="buttonsub" id="acidic" value="11" name="userChoice">Acidic Food</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="buttonsub" id="soda" value="9" name="userChoice">Soda</button>
+                </div>
             </div>
         }
     </div>
 </body>
-
-<script language="C#" runat="server">
-
-</script>
