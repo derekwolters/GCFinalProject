@@ -76,3 +76,4 @@ _[Ss]cripts
 *.csproj
 *.mdf
 *.ldf
+Web.config
