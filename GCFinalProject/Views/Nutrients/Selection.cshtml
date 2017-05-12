@@ -1,27 +1,6 @@
 ﻿@{
     ViewBag.Title = "Selection";
 }
-<head>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrapOveride.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Hungry Hungry Hipsters</h1>
-        </div>
-</body>
-            <h2>Your craving could be related to a deficiency in the following nutrients: </h2>
-
-            @foreach (var item in ViewBag.Data)
-            {
-                <p>@item</p>
-            }
-            <h3>Hungry, Hungry Hipsters Suggests the following recipes: </h3>
-            @foreach (var item in ViewBag.Selection)
-            {
-                <p>@item</p>
-            }
 <h2>Your craving could be related to a deficiency in the following nutrients: </h2>
 
 @foreach (var item in ViewBag.Data)

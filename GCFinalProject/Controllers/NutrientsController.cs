@@ -14,10 +14,10 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        static int userChoice =2;
+        //static int userChoice =2;
 
         static List<string> foodSuggestions = new List<string>();
-        public ActionResult Selection(HealthyCravingsEntities db)
+        public ActionResult Selection(int userChoice)
         {
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
             var nutrientIDList = new List<int>();
