@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Selection";
 }
 
@@ -9,8 +8,29 @@
 {
     <p>@item</p>
 }
-<h3>Hungry, Hungry Hipsters Suggests the following recipes: </h3>
+<h3>Hungry, Hungry Hipsters Suggests the following foods: </h3>
 @foreach(var item in ViewBag.Selection)
 {
     <p>@item</p>
+}
+<h3>Hungry, Hungry Hipsters Suggests the following recipes: </h3>
+@for (int i = 0; i < 5; i++)
+{
+    <tr>
+        <td>
+            <a href="@Model[i].recipe.url" target=newtab>
+                <img src="@Model[i].recipe.image" alt="food" height="50" width="50">
+            </a>
+        </td>
+        <td>
+            @Model[i].recipe.label
+        </td>
+        <td>
+            @foreach (string e in @Model[i].recipe.ingredientLines)
+            {
+                @e;
+                <br />
+            }
+        </td>
+    </tr>
 }
