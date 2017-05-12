@@ -15,12 +15,14 @@ namespace GCFinalProject.Controllers
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
         //static int userChoice =2;
-
         static List<string> foodSuggestions = new List<string>();
-        public ActionResult Selection(int userChoice)
+        static string foodRestriction = "";
+
+        public ActionResult Selection(int userChoice, string dietChoice)
         {
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
             var nutrientIDList = new List<int>();
+            var foodRestriction = dietChoice;
             var nutrientList = db.CravingNutrients.ToArray();
             for (int i = 0; i < nutrientList.Length; i++)
             {
@@ -91,7 +93,7 @@ namespace GCFinalProject.Controllers
             const string clientID = "4e30bc62";
             const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
             string searchTerm = getFoodSuggestions()[0];
-            string searchRestriction = "";
+            //string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 10;
 
@@ -101,9 +103,9 @@ namespace GCFinalProject.Controllers
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
 
-            if (searchRestriction != "")
+            if (foodRestriction != "")
             {
-                strPostData += "&health=" + searchRestriction;
+                strPostData += "&health=" + foodRestriction;
             }
 
             Console.WriteLine(url + strPostData);
