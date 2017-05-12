@@ -34,46 +34,5 @@ namespace GCFinalProject.Controllers
 
             return View();
         }
-        public ActionResult Results()
-        {
-            string searchTerm = NutrientsController.getFoodSuggestions()[0];
-            string searchRestriction = "";
-            int firstResultIndex = 0;
-            int lastRestultIndex = 10;
-
-            var url = "https://api.edamam.com";
-            var strPostData = "/search?q=" + searchTerm;
-            strPostData += "&app_id=" + clientID;
-            strPostData += "&app_key=" + clientKey;
-            strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
-
-            if (searchRestriction != "")
-            {
-                strPostData += "&health=" + searchRestriction;
-            }
-
-            HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
-
-            // actually grabs the request
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            //gets a stream of text
-            StreamReader rd = new StreamReader(response.GetResponseStream());
-
-            //reads to the end of file
-            string ApiText = rd.ReadToEnd();
-
-            //Converts that text into JSON
-            JObject foodData = JObject.Parse(ApiText);
-
-            //serialize data into usable format
-            JavaScriptSerializer oJS = new JavaScriptSerializer();
-            RootObject oRootObject = new RootObject();
-            oRootObject = oJS.Deserialize<RootObject>(ApiText);
-
-            var list = oRootObject.hits.ToList();
-
-            return View(list);
-        }
     }
 }

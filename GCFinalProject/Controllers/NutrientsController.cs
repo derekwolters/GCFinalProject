@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using GCFinalProject.Models;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace GCFinalProject.Controllers
 {
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        int userChoice = 2;
+        static int userChoice =2;
+
         static List<string> foodSuggestions = new List<string>();
         public ActionResult Selection(HealthyCravingsEntities db)
         {
@@ -28,9 +30,10 @@ namespace GCFinalProject.Controllers
                 }
             }
             ViewBag.Data = NutrientNames(db, nutrientIDList);
-            ViewBag.Selection =   SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
-            return View();
+            ViewBag.Selection = SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
+            return View(Results());
         }
+
         public static List<string> NutrientNames(HealthyCravingsEntities db, List<int> nutrientIDList)
         {
             var nutrientNamesList = new List<string>();
@@ -46,8 +49,8 @@ namespace GCFinalProject.Controllers
                 }
             }
             return nutrientNamesList;
-
         }
+
         public static List<int> GetSuggestionID(HealthyCravingsEntities db, List<int> nutrientIDList)
         {
             var suggestedFoodsID = new List<int>();
@@ -79,13 +82,62 @@ namespace GCFinalProject.Controllers
             }
             return foodSuggestions;
         }
-
-
         public static List<string> getFoodSuggestions()
         {
             return foodSuggestions;
         }
+        public List<Hit> Results()
+        {
+            const string clientID = "4e30bc62";
+            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
+            string searchTerm = getFoodSuggestions()[0];
+            string searchRestriction = "";
+            int firstResultIndex = 0;
+            int lastRestultIndex = 10;
 
+            var url = "https://api.edamam.com";
+            var strPostData = "/search?q=" + searchTerm;
+            strPostData += "&app_id=" + clientID;
+            strPostData += "&app_key=" + clientKey;
+            strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
+
+            if (searchRestriction != "")
+            {
+                strPostData += "&health=" + searchRestriction;
+            }
+
+            Console.WriteLine(url + strPostData);
+
+            HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
+
+            // actually grabs the request
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            //gets a stream of text
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+
+            //reads to the end of file
+            string ApiText = rd.ReadToEnd();
+
+            //Converts that text into JSON
+            JObject foodData = JObject.Parse(ApiText);
+
+            //serialize data into usable format
+            JavaScriptSerializer oJS = new JavaScriptSerializer();
+            RootObject oRootObject = new RootObject();
+            oRootObject = oJS.Deserialize<RootObject>(ApiText);
+
+            for (int i = 0; i < oRootObject.hits.Count; i++)
+            {
+                Console.WriteLine(oRootObject.hits[i]);
+            }
+
+            var list = oRootObject.hits.ToList();
+
+            ViewBag.recipeList = list;
+
+            return list;
+        }
 
         //GET: Nutrients
         public ActionResult Index()
