@@ -13,7 +13,8 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        int userChoice = 2;
+
+        static int userChoice =2;
 
         public ActionResult Selection(HealthyCravingsEntities db)
         {

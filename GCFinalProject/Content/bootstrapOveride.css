@@ -1,4 +1,9 @@
-﻿.jumbotron {
+﻿h2 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.jumbotron {
     width:100%;
     padding-bottom:30px;
     font-size: 21px;
@@ -21,9 +26,14 @@
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+.jumbotron img {
+    display: block;
+    margin: auto;
+}
+
 .buttonsub {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     font-size: 18pt;
     color: white;
