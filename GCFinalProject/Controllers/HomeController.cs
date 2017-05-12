@@ -15,8 +15,8 @@ namespace GCFinalProject.Controllers
 
     public class HomeController : Controller
     {
-        const string clientID = "4e30bc62";
-        const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
+        //const string clientID = "4e30bc62";
+        //const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
 
         public ActionResult Index()
         {
@@ -36,53 +36,53 @@ namespace GCFinalProject.Controllers
 
             return View();
         }
-        public ActionResult Results()
-        {
-            string searchTerm = "chicken";
-            string searchRestriction = "";
-            int firstResultIndex = 0;
-            int lastRestultIndex = 10;
+        //public ActionResult Results()
+        //{
+        //    string searchTerm = NutrientsController.getFoodSuggestions()[0];
+        //    string searchRestriction = "";
+        //    int firstResultIndex = 0;
+        //    int lastRestultIndex = 10;
 
-            var url = "https://api.edamam.com";
-            var strPostData = "/search?q=" + searchTerm;
-            strPostData += "&app_id=" + clientID;
-            strPostData += "&app_key=" + clientKey;
-            strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
+        //    var url = "https://api.edamam.com";
+        //    var strPostData = "/search?q=" + searchTerm;
+        //    strPostData += "&app_id=" + clientID;
+        //    strPostData += "&app_key=" + clientKey;
+        //    strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
 
-            if (searchRestriction != "")
-            {
-                strPostData += "&health=" + searchRestriction;
-            }
+        //    if (searchRestriction != "")
+        //    {
+        //        strPostData += "&health=" + searchRestriction;
+        //    }
 
-            Console.WriteLine(url + strPostData);
+        //    Console.WriteLine(url + strPostData);
 
-            HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
+        //    HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
-            // actually grabs the request
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        //    // actually grabs the request
+        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            //gets a stream of text
-            StreamReader rd = new StreamReader(response.GetResponseStream());
+        //    //gets a stream of text
+        //    StreamReader rd = new StreamReader(response.GetResponseStream());
 
-            //reads to the end of file
-            string ApiText = rd.ReadToEnd();
+        //    //reads to the end of file
+        //    string ApiText = rd.ReadToEnd();
 
-            //Converts that text into JSON
-            JObject foodData = JObject.Parse(ApiText);
+        //    //Converts that text into JSON
+        //    JObject foodData = JObject.Parse(ApiText);
 
-            //serialize data into usable format
-            JavaScriptSerializer oJS = new JavaScriptSerializer();
-            RootObject oRootObject = new RootObject();
-            oRootObject = oJS.Deserialize<RootObject>(ApiText);
+        //    //serialize data into usable format
+        //    JavaScriptSerializer oJS = new JavaScriptSerializer();
+        //    RootObject oRootObject = new RootObject();
+        //    oRootObject = oJS.Deserialize<RootObject>(ApiText);
 
-            for (int i = 0; i < oRootObject.hits.Count; i++)
-            {
-                Console.WriteLine(oRootObject.hits[i]);
-            }
+        //    for (int i = 0; i < oRootObject.hits.Count; i++)
+        //    {
+        //        Console.WriteLine(oRootObject.hits[i]);
+        //    }
 
-            var list = oRootObject.hits.ToList();
+        //    var list = oRootObject.hits.ToList();
 
-            return View(list);
-        }
+        //    return View(list);
+        //}
     }
 }
