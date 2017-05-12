@@ -14,10 +14,10 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        int userChoice = 2;
-        static List<string> foodSuggestions = new List<string>();
+        //static int userChoice =2;
 
-        public ActionResult Selection(HealthyCravingsEntities db)
+        static List<string> foodSuggestions = new List<string>();
+        public ActionResult Selection(int userChoice)
         {
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
             var nutrientIDList = new List<int>();
@@ -68,7 +68,7 @@ namespace GCFinalProject.Controllers
             return suggestedFoodsID;
         }
         public static List<string> SuggestedFoods(HealthyCravingsEntities db, List<int> GetSuggestionID)
-        {            
+        {
             var suggestionNames = db.Suggestions.ToArray();
             foreach (var suggestionID in GetSuggestionID)
             {
@@ -82,12 +82,10 @@ namespace GCFinalProject.Controllers
             }
             return foodSuggestions;
         }
-
         public static List<string> getFoodSuggestions()
         {
             return foodSuggestions;
         }
-
         public List<Hit> Results()
         {
             const string clientID = "4e30bc62";
@@ -198,7 +196,7 @@ namespace GCFinalProject.Controllers
                 return HttpNotFound();
             }
             return View(nutrient);
-        }       
+        }
 
         // POST: Nutrients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for

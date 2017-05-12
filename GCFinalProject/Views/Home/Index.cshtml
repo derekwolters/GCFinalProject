@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<html>
+
 <head>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrapOveride.css" rel="stylesheet" />
@@ -10,41 +10,34 @@
 <body>
     <div class="jumbotron">
         <div class="container">
-        <h1>Hungry Hungry Hipsters</h1>
-        <p class="lead">Craving something? Tell us what it is and we will tell you what nurtients your body may be needing and even give you some recipies to satisfy that craving.</p>
+            <img src="~/Content/images/logo.jpg" />
+            <!--<h1>Hungry Hungry Hipsters</h1>
+            <p class="lead">Craving something? Tell us what it is and we will tell you what nurtients your body may be needing and even give you some recipies to satisfy that craving.</p>-->
         </div>
     </div>
 
     <div class="container">
-        <h2>What are you Craving?</h2>
+        <h2> Craving something? </h2>
+        @using (Html.BeginForm("Selection", "Nutrients"))
+        {
             <div class="row">
-                <div class="col-md-3"> 
-                    <input type="submit" class="buttonsub" id="sweets" value="Sweets" onsubmit="return Selection()"/>
+                <div class="col-md-3">
+                    <button type="submit" class="buttonsub" id="sweets" value="2" name="userChoice">Sweets</button>
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" class="buttonsub" id="bread" value="Bread" onsubmit="return Selection()"/>
+                    <button type="submit" class="buttonsub" id="bread" value="3" name="userChoice">Bread</button>
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" class="buttonsub" id="salty" value="Salty Food" onsubmit="return Selection()"/>
+                    <button type="submit" class="buttonsub" id="salty" value="10" name="userChoice">Salty Foods</button>
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" class="buttonsub" id="fatty" value="Fatty Food" onsubmit="return Selection()"/>
+                    <button type="submit" class="buttonsub" id="fatty" value="4" name="userChoice">Fatty Foods</button>
                 </div>
             </div>
+        }
     </div>
 </body>
-</html>
 
-<script>
-    function Selection()
-    {
-        switch (onsubmit) {
-            case $('#sweets'):
-                return 2;
-            case $('#salty'):
-                return 10;
-            default:
-                return 0;
-        }
-    }
+<script language="C#" runat="server">
+
 </script>
