@@ -232,6 +232,7 @@
     <Content Include="Content\images\food.jpg" />
     <Content Include="Content\images\h.jpg" />
     <Content Include="Content\images\hippohipster.jpg" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\saltyfood.jpg" />
     <Content Include="Content\images\sweets.jpg" />
     <Content Include="favicon.ico" />
