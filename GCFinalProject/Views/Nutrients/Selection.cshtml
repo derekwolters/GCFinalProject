@@ -1,17 +1,35 @@
 ﻿@{
     ViewBag.Title = "Selection";
 }
-<h2>Your craving could be related to a deficiency in the following nutrients: </h2>
+
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrapOveride.css" rel="stylesheet" />
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container">
+        <img src="~/Content/images/logo.jpg" />
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-4">
+
+<h3>Your craving could be related to a deficiency in the following nutrients: </h3>
 
 @foreach (var item in ViewBag.Data)
 {
     <p>@item</p>
 }
+    </div>
+    <div class="col-lg-4">
 <h3>Hungry, Hungry Hipsters Suggests the following foods: </h3>
 @foreach(var item in ViewBag.Selection)
 {
     <p>@item</p>
 }
+    </div>
+    <div class="col-lg-4">
 <h3>Hungry, Hungry Hipsters Suggests the following recipes: </h3>
 @for (int i = 0; i < 5; i++)
 {
@@ -33,3 +51,6 @@
         </td>
     </tr>
 }
+        </div>
+</div>
+</body>
