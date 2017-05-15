@@ -88,31 +88,37 @@ namespace GCFinalProject.Controllers
         {
             return foodSuggestions;
         }
+
+        //Grab a list of Hits, contains the recipe results
         public List<Hit> Results()
         {
             const string clientID = "4e30bc62";
-            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
-            string searchTerm = getFoodSuggestions()[0];
-            //string searchRestriction = "";
+            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";            
             int firstResultIndex = 0;
             int lastRestultIndex = 10;
 
+            //generate a random index to grab a random search term
+            Random rand = new Random();
+            int randIndex = rand.Next(firstResultIndex, lastRestultIndex);
+            string searchTerm = getFoodSuggestions()[randIndex];
+
+            //build query string
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
-
+            
+            //check if a diet restriction exists, if yes add it
             if (foodRestriction != "")
             {
                 strPostData += "&health=" + foodRestriction;
             }
 
-            Console.WriteLine(url + strPostData);
-
+            //build HTTP request
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
-            // actually grabs the request
+            //actually grabs the request response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             //gets a stream of text
@@ -129,14 +135,8 @@ namespace GCFinalProject.Controllers
             RootObject oRootObject = new RootObject();
             oRootObject = oJS.Deserialize<RootObject>(ApiText);
 
-            for (int i = 0; i < oRootObject.hits.Count; i++)
-            {
-                Console.WriteLine(oRootObject.hits[i]);
-            }
-
+            //convert JSON list of recipes to a usable format
             var list = oRootObject.hits.ToList();
-
-            ViewBag.recipeList = list;
 
             return list;
         }
