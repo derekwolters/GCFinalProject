@@ -14,8 +14,10 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
+        
         //This list will be overwritten and sent to the API call.
         static List<string> foodSuggestions = new List<string>();
+        
         //Takes userChoice from button input and creates list of nutrient IDs for missing nutrients.
         public ActionResult Selection(int userChoice)
         {
@@ -23,6 +25,7 @@ namespace GCFinalProject.Controllers
             var nutrientIDList = new List<int>();
             var nutrientList = db.CravingNutrients.ToArray();
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            
             //Iterates through database table, matching cravings to nutrient deficiencies.
             for (int i = 0; i < nutrientList.Length; i++)
             {
@@ -35,6 +38,7 @@ namespace GCFinalProject.Controllers
             ViewBag.Selection = SuggestedFoods(GetSuggestionID(nutrientIDList));
             return View(Results());
         }
+        
         //This method converts the list of nutrient IDs to actual nutrient names
         public List<string> NutrientNames(List<int> nutrientIDList)
         {
@@ -70,6 +74,7 @@ namespace GCFinalProject.Controllers
             }
             return suggestedFoodsID;
         }
+        
         //This method returns a list of suggested food names from the food ID list and overwrites foodSuggestions which was instantiated above.
         public List<string> SuggestedFoods(List<int> GetSuggestionID)
         {
@@ -84,17 +89,22 @@ namespace GCFinalProject.Controllers
                     }
                 }
             }
+
+            foodSuggestions = foodSuggestions.Distinct().ToList();
+
             return foodSuggestions;
         }
+
         public static List<string> getFoodSuggestions()
         {
             return foodSuggestions;
         }
+
         public List<Hit> Results()
         {
             const string clientID = "4e30bc62";
             const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
-            string searchTerm = getFoodSuggestions()[0];
+            string searchTerm;
             string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 9;
@@ -104,12 +114,14 @@ namespace GCFinalProject.Controllers
             int randIndex = rand.Next(firstResultIndex, lastRestultIndex);
             searchTerm = getFoodSuggestions()[randIndex];
 
+            //build the API call string request
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
 
+            //check if there is a health restriction
             if (searchRestriction != "")
             {
                 strPostData += "&health=" + searchRestriction;
