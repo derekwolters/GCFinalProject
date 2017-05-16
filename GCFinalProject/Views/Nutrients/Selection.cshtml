@@ -16,13 +16,14 @@
     <!--top of page image-->
     <div class="jumbotron">
         <div class="container">
-            <img src="~/Content/images/logo.jpg" />
+            
+           <img src="~/Content/images/logo.jpg" onclick="location.href='@Url.Action("Index", "Home")'"/>
         </div>
     </div>
     <!--start of page contents-->
     <div class="container">
-        <div class="col-lg-6">
 
+        <div class="col-lg-6">
             <h3>Your craving could be related to a deficiency in the following nutrients: </h3>
 
             <div id="suggestion">
@@ -87,7 +88,14 @@
                     </tr>
                 </div>
             }
+        <div id="navigation">
+            <div class="col-lg-6">
+                <input type="button" value="Return to Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+            </div>
 
-
+            <div class="col-lg-6">
+                <input type="button" value="Get Different Recipes" onClick="window.location.reload()">
+            </div>
+        </div>
     </div>
 </body>

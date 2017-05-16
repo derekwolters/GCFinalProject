@@ -111,7 +111,7 @@ namespace GCFinalProject.Controllers
 
             //generate a random index to grab a random search term
             Random rand = new Random();
-            int randIndex = rand.Next(firstResultIndex, lastRestultIndex);
+            int randIndex = rand.Next(0, foodSuggestions.Count());
             searchTerm = getFoodSuggestions()[randIndex];
 
             //build the API call string request
