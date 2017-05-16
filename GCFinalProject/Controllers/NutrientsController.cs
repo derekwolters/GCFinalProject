@@ -102,7 +102,7 @@ namespace GCFinalProject.Controllers
             //generate a random index to grab a random search term
             Random rand = new Random();
             int randIndex = rand.Next(firstResultIndex, lastRestultIndex);
-            string searchTerm = getFoodSuggestions()[randIndex];
+            searchTerm = getFoodSuggestions()[randIndex];
 
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
