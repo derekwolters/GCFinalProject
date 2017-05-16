@@ -14,14 +14,15 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        //static int userChoice =2;
-
+        //This list will be overwritten and sent to the API call.
         static List<string> foodSuggestions = new List<string>();
+        //Takes userChoice from button input and creates list of nutrient IDs for missing nutrients.
         public ActionResult Selection(int userChoice)
         {
-            ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            foodSuggestions.Clear();
             var nutrientIDList = new List<int>();
             var nutrientList = db.CravingNutrients.ToArray();
+            ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
             for (int i = 0; i < nutrientList.Length; i++)
             {
                 if (userChoice == nutrientList[i].CravingID)
@@ -29,12 +30,12 @@ namespace GCFinalProject.Controllers
                     nutrientIDList.Add(nutrientList[i].NutrientID);
                 }
             }
-            ViewBag.Data = NutrientNames(db, nutrientIDList);
-            ViewBag.Selection = SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
+            ViewBag.Data = NutrientNames(nutrientIDList);
+            ViewBag.Selection = SuggestedFoods(GetSuggestionID(nutrientIDList));
             return View(Results());
         }
-
-        public static List<string> NutrientNames(HealthyCravingsEntities db, List<int> nutrientIDList)
+        //This method converts the list of nutrient IDs to actual nutrient names
+        public List<string> NutrientNames(List<int> nutrientIDList)
         {
             var nutrientNamesList = new List<string>();
             var namesList = db.Nutrients.ToArray();
@@ -51,7 +52,8 @@ namespace GCFinalProject.Controllers
             return nutrientNamesList;
         }
 
-        public static List<int> GetSuggestionID(HealthyCravingsEntities db, List<int> nutrientIDList)
+        //This method maps nutrientIDs to suggested food IDs.
+        public List<int> GetSuggestionID(List<int> nutrientIDList)
         {
             var suggestedFoodsID = new List<int>();
             var suggestionList = db.NutrientSuggestions.ToArray();
@@ -67,7 +69,8 @@ namespace GCFinalProject.Controllers
             }
             return suggestedFoodsID;
         }
-        public static List<string> SuggestedFoods(HealthyCravingsEntities db, List<int> GetSuggestionID)
+        //This method returns a list of suggested food names from the food ID list and overwrites foodSuggestions which was instantiated above.
+        public List<string> SuggestedFoods(List<int> GetSuggestionID)
         {
             var suggestionNames = db.Suggestions.ToArray();
             foreach (var suggestionID in GetSuggestionID)
@@ -104,6 +107,7 @@ namespace GCFinalProject.Controllers
             if (searchRestriction != "")
             {
                 strPostData += "&health=" + searchRestriction;
+
             }
 
             Console.WriteLine(url + strPostData);
