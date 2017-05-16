@@ -14,16 +14,16 @@ namespace GCFinalProject.Controllers
     public class NutrientsController : Controller
     {
         private HealthyCravingsEntities db = new HealthyCravingsEntities();
-        //static int userChoice =2;
+        //This list will be overwritten and sent to the API call.
         static List<string> foodSuggestions = new List<string>();
-        static string foodRestriction = "";
-
-        public ActionResult Selection(int userChoice, string dietChoice)
+        //Takes userChoice from button input and creates list of nutrient IDs for missing nutrients.
+        public ActionResult Selection(int userChoice)
         {
-            ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            foodSuggestions.Clear();
             var nutrientIDList = new List<int>();
-            foodRestriction = dietChoice;
             var nutrientList = db.CravingNutrients.ToArray();
+            ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            //Iterates through database table, matching cravings to nutrient deficiencies.
             for (int i = 0; i < nutrientList.Length; i++)
             {
                 if (userChoice == nutrientList[i].CravingID)
@@ -31,12 +31,12 @@ namespace GCFinalProject.Controllers
                     nutrientIDList.Add(nutrientList[i].NutrientID);
                 }
             }
-            ViewBag.Data = NutrientNames(db, nutrientIDList);
-            ViewBag.Selection = SuggestedFoods(db, GetSuggestionID(db, nutrientIDList));
+            ViewBag.Data = NutrientNames(nutrientIDList);
+            ViewBag.Selection = SuggestedFoods(GetSuggestionID(nutrientIDList));
             return View(Results());
         }
-
-        public static List<string> NutrientNames(HealthyCravingsEntities db, List<int> nutrientIDList)
+        //This method converts the list of nutrient IDs to actual nutrient names
+        public List<string> NutrientNames(List<int> nutrientIDList)
         {
             var nutrientNamesList = new List<string>();
             var namesList = db.Nutrients.ToArray();
@@ -53,7 +53,8 @@ namespace GCFinalProject.Controllers
             return nutrientNamesList;
         }
 
-        public static List<int> GetSuggestionID(HealthyCravingsEntities db, List<int> nutrientIDList)
+        //This method maps nutrientIDs to suggested food IDs.
+        public List<int> GetSuggestionID(List<int> nutrientIDList)
         {
             var suggestedFoodsID = new List<int>();
             var suggestionList = db.NutrientSuggestions.ToArray();
@@ -69,7 +70,8 @@ namespace GCFinalProject.Controllers
             }
             return suggestedFoodsID;
         }
-        public static List<string> SuggestedFoods(HealthyCravingsEntities db, List<int> GetSuggestionID)
+        //This method returns a list of suggested food names from the food ID list and overwrites foodSuggestions which was instantiated above.
+        public List<string> SuggestedFoods(List<int> GetSuggestionID)
         {
             var suggestionNames = db.Suggestions.ToArray();
             foreach (var suggestionID in GetSuggestionID)
@@ -88,41 +90,37 @@ namespace GCFinalProject.Controllers
         {
             return foodSuggestions;
         }
-
-        //Grab a list of Hits, contains the recipe results
         public List<Hit> Results()
         {
             const string clientID = "4e30bc62";
-            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";            
+            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
+            string searchTerm = getFoodSuggestions()[0];
+            string searchRestriction = "";
             int firstResultIndex = 0;
-<<<<<<< HEAD
             int lastRestultIndex = 9;
-=======
-            int lastRestultIndex = 6;
->>>>>>> bad52f59449c558a91c2ffaedf23a7b490587686
 
             //generate a random index to grab a random search term
             Random rand = new Random();
             int randIndex = rand.Next(firstResultIndex, lastRestultIndex);
             string searchTerm = getFoodSuggestions()[randIndex];
 
-            //build query string
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
             strPostData += "&app_id=" + clientID;
             strPostData += "&app_key=" + clientKey;
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
-            
-            //check if a diet restriction exists, if yes add it
-            if (foodRestriction != "")
+
+            if (searchRestriction != "")
             {
-                strPostData += "&health=" + foodRestriction;
+                strPostData += "&health=" + searchRestriction;
+
             }
 
-            //build HTTP request
+            Console.WriteLine(url + strPostData);
+
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
-            //actually grabs the request response
+            // actually grabs the request
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             //gets a stream of text
@@ -139,8 +137,14 @@ namespace GCFinalProject.Controllers
             RootObject oRootObject = new RootObject();
             oRootObject = oJS.Deserialize<RootObject>(ApiText);
 
-            //convert JSON list of recipes to a usable format
+            for (int i = 0; i < oRootObject.hits.Count; i++)
+            {
+                Console.WriteLine(oRootObject.hits[i]);
+            }
+
             var list = oRootObject.hits.ToList();
+
+            ViewBag.recipeList = list;
 
             return list;
         }
