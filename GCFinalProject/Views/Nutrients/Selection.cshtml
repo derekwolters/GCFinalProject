@@ -28,7 +28,13 @@
             <div id="suggestion">
                 @foreach (var item in ViewBag.Data)
                 {
-                    <p>@item</p>
+                    <div class="col-lg-6">
+                        <tr>
+                            <td>
+                                <p>@item</p>
+                            </td>
+                        </tr>
+                    </div>
                 }
                 </div>
         </div>
@@ -37,7 +43,13 @@
             <div id="suggestion">
                 @foreach(var item in ViewBag.Selection)
                 {
-                    <p>@item</p>
+                    <div class="col-lg-6">
+                        <tr>
+                            <td>
+                                <p>@item</p>
+                            </td>
+                        </tr>
+                    </div>
                 }
                </div>
         </div>
@@ -59,15 +71,19 @@
                                 @f.recipe.label
                             </div>
                         </td>
-                        @*<td>
+
+                       <!--<td>
                             <div id="ingredients">
-                                @foreach (string e in @f.recipe.ingredientLines)
+                                @foreach (string e in f.recipe.ingredientLines)
+
                                 {
                                     @e;
                                     <br />
                                 }
                             </div>
-                        </td>*@
+
+                        </td>-->
+
                     </tr>
                 </div>
             }

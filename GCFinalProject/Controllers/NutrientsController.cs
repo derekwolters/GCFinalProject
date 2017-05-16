@@ -95,7 +95,11 @@ namespace GCFinalProject.Controllers
             const string clientID = "4e30bc62";
             const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";            
             int firstResultIndex = 0;
+<<<<<<< HEAD
             int lastRestultIndex = 9;
+=======
+            int lastRestultIndex = 6;
+>>>>>>> bad52f59449c558a91c2ffaedf23a7b490587686
 
             //generate a random index to grab a random search term
             Random rand = new Random();
