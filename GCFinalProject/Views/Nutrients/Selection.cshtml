@@ -28,7 +28,13 @@
             <div id="suggestion">
                 @foreach (var item in ViewBag.Data)
                 {
-                    <p>@item</p>
+                    <div class="col-lg-6">
+                        <tr>
+                            <td>
+                                <p>@item</p>
+                            </td>
+                        </tr>
+                    </div>
                 }
                 </div>
         </div>
@@ -37,37 +43,43 @@
             <div id="suggestion">
                 @foreach(var item in ViewBag.Selection)
                 {
-                    <p>@item</p>
+                    <div class="col-lg-6">
+                        <tr>
+                            <td>
+                                <p>@item</p>
+                            </td>
+                        </tr>
+                    </div>
                 }
                </div>
         </div>
         
             <h3>Hungry Hungry Hipsters Suggests the following recipes: </h3>
         
-            @for (int i = 0; i < 6; i++)
+            @foreach (var f in Model)
             {
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <tr>
 
                         <td>
-                            <a href="@Model[i].recipe.url" target=newtab>
-                                <img id="recipeImg" src="@Model[i].recipe.image" alt="food">
+                            <a href="@f.recipe.url" target=newtab>
+                                <img id="recipeImg" src="@f.recipe.image" alt="food">
                             </a>
                         </td>
                         <td>
                             <div id="recipeLabel">
-                                @Model[i].recipe.label
+                                @f.recipe.label
                             </div>
                         </td>
-                        <td>
+                       <!--<td>
                             <div id="ingredients">
-                                @foreach (string e in @Model[i].recipe.ingredientLines)
+                                @foreach (string e in f.recipe.ingredientLines)
                                 {
                                     @e;
                                     <br />
                                 }
                             </div>
-                        </td>
+                        </td>-->
                     </tr>
                 </div>
             }
