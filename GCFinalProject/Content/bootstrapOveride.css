@@ -112,11 +112,19 @@ h3  {
     background-size:cover;
 }
 
+#recipeImg:hover{
+    background: #006633;
+    border: 5px solid #00b359;
+    border-radius: 50%;
+    transition: background-color 1s ease #006633;
+}
+
 #recipeLabel {
     margin-top:10px;
     text-align: center;
     font-family:'Arial Narrow Bold', sans-serif;
     font-size: 14pt;
+    padding-bottom: 30px;
 }
 
 #ingredients{
