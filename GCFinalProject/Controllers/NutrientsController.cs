@@ -23,6 +23,7 @@ namespace GCFinalProject.Controllers
             var nutrientIDList = new List<int>();
             var nutrientList = db.CravingNutrients.ToArray();
             ViewBag.Message = "Your craving could be related to a deficiency in the following nutrients: ";
+            //Iterates through database table, matching cravings to nutrient deficiencies.
             for (int i = 0; i < nutrientList.Length; i++)
             {
                 if (userChoice == nutrientList[i].CravingID)

@@ -14,8 +14,6 @@ namespace GCFinalProject.Controllers
 {
     public class HomeController : Controller
     {
-        const string clientID = "4e30bc62";
-        const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
         public ActionResult Index()
         {
             return View();

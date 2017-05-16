@@ -4,40 +4,72 @@
 
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Hungry Hungry Hipsters</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--CSS calls-->
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrapOveride.css" rel="stylesheet" />
 </head>
 <body>
+    <!--top of page image-->
     <div class="jumbotron">
         <div class="container">
             <img src="~/Content/images/logo.jpg" />
             <!--<h1>Hungry Hungry Hipsters</h1>
             <p class="lead">Craving something? Tell us what it is and we will tell you what nutrients your body may be needing and even give you some recipes to satisfy that craving.</p>-->
+
         </div>
     </div>
 
+    <!--begin page-->
     <div class="container">
-        <h2> Craving something? </h2>
+        <h4>Welcome to Hungry Hungry Hipsters. Having a craving for something bad? It might be because your body is missing out on some nutrients, so tell us what you're craving and we'll tell you what nurtients you may be lacking and even give you some recipes to satisfy those cravings. </h4>
+        <h3>First off, do you have any Dietary Restrictions?</h3>
         @using (Html.BeginForm("Selection", "Nutrients"))
         {
-            <div class="row">
-                <div class="col-md-3">
-                    <button type="submit" class="buttonsub" id="sweets" value="2" name="userChoice">Sweets</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="buttonsub" id="bread" value="3" name="userChoice">Bread</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="buttonsub" id="salty" value="10" name="userChoice">Salty Foods</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="buttonsub" id="fatty" value="4" name="userChoice">Fatty Foods</button>
-                </div>
+            <div class= dietdrop>
+            <!--diet restriction dropdown menu-->
+            <select name="dietChoice" value="Choose one.">
+                <option value="">No Restrictions</option>
+                <option value="vegan">Vegan</option>
+                <option value="gluten-free">Gluten-Free</option>
+                <option value="peanut-free">Peanut Allergy</option>
+                <option value="vegitarian">Vegitarian</option>
+                <option value="tree-nut-free">Tree Nut Allergy</option>
+                <option value="alcohol-free">Alcohol Free</option>
+            </select>
             </div>
-        }
-    </div>
+            <!--cravings buttons-->
+            <h3> What are you Craving? </h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="sweets" value="2" name="userChoice">Sweets</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="bread" value="3" name="userChoice">Bread</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="salty" value="10" name="userChoice">Salty Foods</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="fatty" value="4" name="userChoice">Fatty Foods</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="chocolate" value="1" name="userChoice">Chocolate</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="alcohol" value="6" name="userChoice">Alcohol</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="acidic" value="11" name="userChoice">Acidic Food</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="buttonsub" id="soda" value="9" name="userChoice">Soda</button>
+                    </div>
+                </div>
+            }
+        </div>
 </body>
-
-<script language="C#" runat="server">
-
-</script>
