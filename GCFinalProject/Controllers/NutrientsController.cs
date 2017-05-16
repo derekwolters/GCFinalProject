@@ -102,34 +102,33 @@ namespace GCFinalProject.Controllers
 
         public List<Hit> Results()
         {
-            const string clientID = "4e30bc62";
-            const string clientKey = "ec86a3101ba85f41ca22c992867e8d10";
             string searchTerm;
             string searchRestriction = "";
             int firstResultIndex = 0;
             int lastRestultIndex = 9;
+            Codes secret = new Codes();
 
             //generate a random index to grab a random search term
             Random rand = new Random();
-            int randIndex = rand.Next(0, foodSuggestions.Count());
+
+            int randIndex = rand.Next(0, foodSuggestions.Count);
+
             searchTerm = getFoodSuggestions()[randIndex];
 
             //build the API call string request
             var url = "https://api.edamam.com";
             var strPostData = "/search?q=" + searchTerm;
-            strPostData += "&app_id=" + clientID;
-            strPostData += "&app_key=" + clientKey;
+            strPostData += "&app_id=" + secret.getID();
+            strPostData += "&app_key=" + secret.getKey();
             strPostData += "&from=" + firstResultIndex + "&to=" + lastRestultIndex;
 
             //check if there is a health restriction
             if (searchRestriction != "")
             {
                 strPostData += "&health=" + searchRestriction;
-
             }
 
-            Console.WriteLine(url + strPostData);
-
+            //combine the base URL and the post data
             HttpWebRequest request = WebRequest.CreateHttp(url + strPostData);
 
             // actually grabs the request
@@ -149,14 +148,8 @@ namespace GCFinalProject.Controllers
             RootObject oRootObject = new RootObject();
             oRootObject = oJS.Deserialize<RootObject>(ApiText);
 
-            for (int i = 0; i < oRootObject.hits.Count; i++)
-            {
-                Console.WriteLine(oRootObject.hits[i]);
-            }
-
+            //put the list of recipes that we can interface with
             var list = oRootObject.hits.ToList();
-
-            ViewBag.recipeList = list;
 
             return list;
         }
