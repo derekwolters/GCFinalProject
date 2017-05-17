@@ -4,16 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HealthyCravingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HealthyCravingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'healthycravings.dbo.Craving' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Craving">
           <Key>
             <PropertyRef Name="CravingID" />
+            
           </Key>
-          <Property Name="CravingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CravingID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CravingName" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'HealthyCravings.dbo.CravingNutrient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'healthycravings.dbo.CravingNutrient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CravingNutrient">
           <Key>
             <PropertyRef Name="CravingID" />
@@ -22,15 +25,17 @@ warning 6002: The table/view 'HealthyCravings.dbo.CravingNutrient' does not have
           <Property Name="CravingID" Type="int" Nullable="false" />
           <Property Name="NutrientID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'healthycravings.dbo.Nutrient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Nutrient">
           <Key>
             <PropertyRef Name="NutrientID" />
           </Key>
-          <Property Name="NutrientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NutrientID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NutrientName" Type="nchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'HealthyCravings.dbo.NutrientSuggestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'healthycravings.dbo.NutrientSuggestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NutrientSuggestion">
           <Key>
             <PropertyRef Name="NutrientID" />
@@ -39,22 +44,33 @@ warning 6002: The table/view 'HealthyCravings.dbo.NutrientSuggestion' does not h
           <Property Name="NutrientID" Type="int" Nullable="false" />
           <Property Name="SuggestionID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'healthycravings.dbo.Suggestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Suggestion">
           <Key>
             <PropertyRef Name="SuggestionID" />
           </Key>
-          <Property Name="SuggestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuggestionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SuggestionName" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="HealthyCravingsModelStoreContainer">
-          <EntitySet Name="Craving" EntityType="Self.Craving" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Nutrient" EntityType="Self.Nutrient" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Suggestion" EntityType="Self.Suggestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Craving" EntityType="Self.Craving" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Craving].[CravingID] AS [CravingID], 
+    [Craving].[CravingName] AS [CravingName]
+    FROM [dbo].[Craving] AS [Craving]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="CravingNutrient" EntityType="Self.CravingNutrient" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CravingNutrient].[CravingID] AS [CravingID], 
     [CravingNutrient].[NutrientID] AS [NutrientID]
     FROM [dbo].[CravingNutrient] AS [CravingNutrient]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Nutrient" EntityType="Self.Nutrient" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Nutrient].[NutrientID] AS [NutrientID], 
+    [Nutrient].[NutrientName] AS [NutrientName]
+    FROM [dbo].[Nutrient] AS [Nutrient]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="NutrientSuggestion" EntityType="Self.NutrientSuggestion" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -62,9 +78,14 @@ warning 6002: The table/view 'HealthyCravings.dbo.NutrientSuggestion' does not h
     [NutrientSuggestion].[SuggestionID] AS [SuggestionID]
     FROM [dbo].[NutrientSuggestion] AS [NutrientSuggestion]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Suggestion" EntityType="Self.Suggestion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Suggestion].[SuggestionID] AS [SuggestionID], 
+    [Suggestion].[SuggestionName] AS [SuggestionName]
+    FROM [dbo].[Suggestion] AS [Suggestion]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HealthyCravingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
