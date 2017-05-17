@@ -3,9 +3,12 @@
 }
 
 <head>
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Hungry Hungry Hipsters</title>
+    <title>Hungry Hungry Hipsters</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <!--CSS references-->
@@ -61,7 +64,7 @@
             {
                 <div class="col-lg-4">
                     <tr>
-
+                        <div id="recipeblocks">
                         <td>
                             <a href="@f.recipe.url" target=newtab>
                                 <img id="recipeImg" src="@f.recipe.image" alt="food">
@@ -72,6 +75,7 @@
                                 @f.recipe.label
                             </div>
                         </td>
+                        </div>
 
                        <!--<td>
                             <div id="ingredients">
