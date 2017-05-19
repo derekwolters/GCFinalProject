@@ -5,7 +5,6 @@
 <head>
     <!--Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hungry Hungry Hipsters</title>
@@ -19,8 +18,8 @@
     <!--top of page image-->
     <div class="jumbotron">
         <div class="container">
-            
-           <img src="~/Content/images/logo.jpg" onclick="location.href='@Url.Action("Index", "Home")'"/>
+
+            <img src="~/Content/images/logo.jpg" onclick="location.href='@Url.Action("Index", "Home")'" />
         </div>
     </div>
     <!--start of page contents-->
@@ -30,7 +29,7 @@
             <h3>Your craving could be related to a deficiency in the following nutrients: </h3>
 
             <div id="suggestion">
-                @foreach (var item in ViewBag.Data)
+                @foreach (var item in ViewBag.Nutrients)
                 {
                     <div class="col-lg-6">
                         <tr>
@@ -40,12 +39,12 @@
                         </tr>
                     </div>
                 }
-                </div>
+            </div>
         </div>
         <div class="col-lg-6">
             <h3>Hungry Hungry Hipsters Suggests the following foods: </h3>
             <div id="suggestion">
-                @foreach(var item in ViewBag.Selection)
+                @foreach (var item in ViewBag.Selection)
                 {
                     <div class="col-lg-6">
                         <tr>
@@ -55,16 +54,16 @@
                         </tr>
                     </div>
                 }
-               </div>
+            </div>
         </div>
-        
-            <h3>Hungry Hungry Hipsters Suggests the following recipes: </h3>
-        
-            @foreach (var f in Model)
+
+        <h3>Hungry Hungry Hipsters Suggests the following recipes: </h3>
+
+        @foreach (var f in Model)
             {
-                <div class="col-lg-4">
-                    <tr>
-                        <div id="recipeblocks">
+            <div class="col-lg-4">
+                <tr>
+                    <div id="recipeblocks">
                         <td>
                             <a href="@f.recipe.url" target=newtab>
                                 <img id="recipeImg" src="@f.recipe.image" alt="food">
@@ -75,23 +74,23 @@
                                 @f.recipe.label
                             </div>
                         </td>
-                        </div>
+                    </div>
 
-                       <!--<td>
-                            <div id="ingredients">
-                                @foreach (string e in f.recipe.ingredientLines)
+                    <!--<td>
+                         <div id="ingredients">
+                             @foreach (string e in f.recipe.ingredientLines)
 
-                                {
-                                    @e;
-                                    <br />
-                                }
-                            </div>
+                             {
+                                 @e;
+                                 <br />
+                             }
+                         </div>
 
-                        </td>-->
+                     </td>-->
 
-                    </tr>
-                </div>
-            }
+                </tr>
+            </div>
+        }
         <div id="navigation">
             <div class="col-lg-6">
                 <input type="button" value="Return to Home" onclick="location.href='@Url.Action("Index", "Home")'" />
@@ -102,4 +101,44 @@
             </div>
         </div>
     </div>
+    @ViewBag.dietChoice
+    <br>
+    <p>-----VEGAN LIST-----------</p>
+    <br>
+    @foreach (var item in ViewBag.veganlist)
+    {
+        <div class="col-lg-6">
+            <tr>
+                <td>
+                    <p>@item</p>
+                </td>
+            </tr>
+        </div>
+    }
+    <br>
+    <p>-----INPUT LIST------------</p>
+    <br>
+    @foreach (var item in ViewBag.inputlist)
+    {
+        <div class="col-lg-6">
+            <tr>
+                <td>
+                    <p>@item</p>
+                </td>
+            </tr>
+        </div>
+    }
+    <br>
+    <p>-----OUTPUT LIST------------</p>
+    <br>
+    @foreach (var item in ViewBag.outputlist)
+    {
+        <div class="col-lg-6">
+            <tr>
+                <td>
+                    <p>@item</p>
+                </td>
+            </tr>
+        </div>
+    }
 </body>
